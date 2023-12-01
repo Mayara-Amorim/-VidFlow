@@ -6,6 +6,9 @@ async function buscar() {
     const videos = await busca.json();// .then(res=>res.json())//precisamos transformar em json pois esse fetch vai devolver uma promise
     // .then((videos)=>
     videos.forEach(video => {
+        if(video.categoaria == ""){
+            throw new Error("Categoria vazia");
+        }
         containerVideos.innerHTML += `
         <li class="videos__item">
         <iframe src="${video.url}" title="${video.titulo}" frameborder="0" allowfullscreen></iframe>
