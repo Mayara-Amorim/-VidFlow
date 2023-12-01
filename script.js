@@ -1,7 +1,9 @@
 const containerVideos = document.querySelector(".videos__container")
 
-
-const api = fetch("http://localhost:3000/videos").then(res=>res.json()).then((videos)=>
+async function buscar() {
+    const busca = await fetch("http://localhost:3000/videos");
+   const videos = await busca.json();// .then(res=>res.json())//precisamos transformar em json pois esse fetch vai devolver uma promise
+                                    // .then((videos)=>
     videos.forEach(video=> {
        containerVideos.innerHTML+=`
         <li class="videos__item">
@@ -14,7 +16,8 @@ const api = fetch("http://localhost:3000/videos").then(res=>res.json()).then((vi
         </li>
        `;
     })
-).catch((error)=>{
-    containerVideos.innerHTML = `<p> Houve o erro ${error}, por isso não será possivel carregar os videos</p>`
-})
+}
+
+buscar();
+
 
