@@ -16,6 +16,7 @@ async function buscar() {
             <img class="img-canal" src="${video.imagem}">
             <h3 class="titulo-video">${video.titulo}</h3>
             <p class="titulo-canal">${video.descricao}</p>
+            <p class="categoria" hidden>${video.categoaria}</p>
         </div>
         </li>
        `;
@@ -57,5 +58,27 @@ function filtrarPesquisa() {
       video.style.display = valorFiltro ? titulo.includes(valorFiltro) ? 'block' : 'none' : 'block';
     });
   }
+
+  const botaoCategoria = document.querySelectorAll(".superior__item");
+
   
+  botaoCategoria.forEach((botao=> {
+    let nomeCategoria = botao.getAttribute("name");
+    botão.addEventListener("click", filtrarCategoria(nomeCategoria))
+  }))
+
+function filtrarCategoria(filtro) {
+    const videos = document.querySelectorAll('.videos__item');
+    videos.forEach(video => {
+           let filtro = filtro.toLowerCase();
+           let categoria = video.querySelector(".categoria").toLowerCase();
+            if(!categoria.includes(filtro) && filtro != "tudo"){
+                video.style.display="none";
+                
+            }else{
+                video.style.display="block";
+            }
+        });
+    }
+    
 
